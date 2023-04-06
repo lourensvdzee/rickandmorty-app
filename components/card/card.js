@@ -1,8 +1,10 @@
 
-import { cardContainer } from "./index.js"
+
+
 export function createCharacterCard(character) {
     
  const cardItem = document.createElement("li");
+ cardItem.classList.add("card");
  cardItem.innerHTML = ` <div class="card__image-container">
  <img
    class="card__image"
@@ -23,6 +25,7 @@ export function createCharacterCard(character) {
  </dl>
 </div>
 `
-cardContainer.append(cardItem);
+return li
 
 }
+
