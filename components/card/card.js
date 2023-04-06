@@ -8,7 +8,7 @@ export function createCharacterCard(character) {
     cardItem.innerHTML = ` <div class="card__image-container">
  <img
    class="card__image"
-   src=${character.url}
+   src=${character.image}
    alt="Rick Sanchez"
  />
  <div class="card__image-gradient"></div>
