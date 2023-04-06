@@ -26,13 +26,13 @@ async function fetchCharacters() {
     console.log(data.results)
     let newData = data.results
 
+    cardContainer.innerHTML = "";
 
-    newData.forEach((character) =>
-      // const newCard = Card(person);
-      // renderElement(newCard);
-      createCharacterCard(character)
+    newData.forEach((character) => {
+      const card = createCharacterCard(character);
+      cardContainer.appendChild(card);
 
-    );
+    });
 
   } catch (error) {
     console.error("error fetching data:", error);
