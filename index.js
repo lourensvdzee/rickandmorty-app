@@ -11,8 +11,8 @@ const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
 // States
-const maxPage = 1;
-const page = 1;
+let maxPage = 1;
+let page = 1;
 let searchQuery = "";
 
 /* --------------------------------------------------------------------
@@ -21,10 +21,15 @@ Fetching data
 
 async function fetchCharacters() {
   try {
-    const response = await fetch(`https://rickandmortyapi.com/api/character?name=${searchQuery}`);
+    //Lourens added: page variable in URL
+    const response = await fetch(`https://rickandmortyapi.com/api/character?page=${page}&name=${searchQuery}`);
     const data = await response.json();
     console.log(data.results)
     let newData = data.results
+
+    //Lourens: added max count
+    maxPage = data.info.pages;
+    // console.log(maxPage, page)
 
     cardContainer.innerHTML = "";
 
@@ -42,6 +47,47 @@ async function fetchCharacters() {
 console.log("Calling fetchCharacters...");
 fetchCharacters();
 
+/* --------------------------------------------------------------------
+Pagination starts from here:
+----------------------------------------------------------------------- */
+//Lourens: added paginationDisplay
+// const paginationDisplay = document.getElementById('pagination-display');
+pagination.textContent = `Page ${page} of ${maxPage}`;
+
+
+//functions for prev and next buttons
+function handlePrevButtonClick() {
+  if (page > 1) {
+    page--;
+    fetchCharacters(page);
+  }
+}
+
+function handleNextButtonClick() {
+  if (page < maxPage) {
+    page++;
+    fetchCharacters(page);
+  }
+}
+
+//eventlisteners for prev and next buttons
+prevButton.addEventListener('click', () => {
+  if (page > 1) {
+    page--;
+    // console.log("i work hehe")
+    fetchCharacters(page);
+    pagination.textContent = `Page ${page} of ${maxPage}`
+  }
+});
+
+nextButton.addEventListener('click', () => {
+  // console.log("i work hehe")
+  handleNextButtonClick();
+  pagination.textContent = `Page ${page} of ${maxPage}`
+});
+
+console.log("Calling fetchCharacters 2...");
+fetchCharacters();
 
 
 
