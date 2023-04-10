@@ -1,4 +1,5 @@
 import { createCharacterCard } from './components/card/card.js';
+//Ekaterina: import functions due to reactoring
 import { createButton } from './components/nav-button/nav-button.js';
 import { createPagination } from './components/nav-pagination/nav-pagination.js';
 
@@ -8,21 +9,20 @@ const searchBarContainer = document.querySelector(
   '[data-js="search-bar-container"]'
 );
 const searchBar = document.querySelector('[data-js="search-bar"]');
-const navigation = document.querySelector('[data-js="navigation"]');
-// const prevButton = document.querySelector('[data-js="button-prev"]');
 
+const navigation = document.querySelector('[data-js="navigation"]');
+
+//Ekaterina: const changed due to refactoring
 const prevButton = createButton("previous");
 navigation.append(prevButton);
 
-// const pagination = document.querySelector('[data-js="pagination"]');
+//Ekaterina: const changed due to refactoring
 const pagination = createPagination();
 navigation.append(pagination)
 
-
-// const nextButton = document.querySelector('[data-js="button-next"]');
+//Ekaterina: const changed due to refactoring
 const nextButton = createButton("next");
 navigation.append(nextButton);
-
 
 
 // States
@@ -101,16 +101,12 @@ console.log("Calling fetchCharacters 2...");
 fetchCharacters();
 
 
-
-//search bar 
+//Ekaterina: search bar event listener
 
 searchBar.addEventListener("submit", (event) => {
 
   event.preventDefault();
   console.log(event.target);
-
-  const formData = new FormData(event.target);
-  const name = Object.fromEntries(formData);
 
   searchQuery = document.querySelector("input").value;
   fetchCharacters();
